@@ -4,10 +4,12 @@ import React from "react";
 interface FormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   setDesc: React.Dispatch<React.SetStateAction<string>>;
+  desc: string;
 }
 export default function TodoForm({
   handleSubmit,
   setDesc,
+  desc,
 }: FormProps): JSX.Element {
   return (
     <Box
@@ -25,6 +27,7 @@ export default function TodoForm({
         id="outlined-basic"
         label="Outlined"
         variant="outlined"
+        value={desc}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setDesc(event.target.value);
         }}

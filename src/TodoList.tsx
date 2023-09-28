@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoView from "./TodoView";
 import TodoFooter from "./TodoFooter";
@@ -17,9 +17,35 @@ export default function TodoList(): JSX.Element {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const newItem: Todo = { picked: false, desc, id: Date.now() };
-    setItem([...item, newItem]);
+    const updatedItems = [...item, newItem]; // Create a new array with the new item
+    setItem(updatedItems);
+    localStorage.setItem("TODO", JSON.stringify(updatedItems)); // Update the "TODO" key in localStorage
     setDesc("");
   }
+
+  useEffect(() => {
+    // Load todos from localStorage on component mount
+    try {
+      const storedTodos = localStorage.getItem("TODO");
+      if (storedTodos) {
+        setItem(JSON.parse(storedTodos));
+      }
+    } catch (error) {
+      console.error("Error loading data from localStorage:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save todos to localStorage whenever 'item' changes
+    try {
+      localStorage.setItem("TODO", JSON.stringify(item));
+    } catch (error) {
+      console.error("Error saving data to localStorage:", error);
+    }
+  }, [item]);
+
+  // Rest of your code...
+
   function handleDelete(id: number) {
     setItem((item) => item.filter((i) => i.id !== id));
   }
@@ -51,7 +77,11 @@ export default function TodoList(): JSX.Element {
         <Typography>Add a Todo</Typography>
       </Box>
 
-      <TodoForm handleSubmit={handleSubmit} setDesc={setDesc}></TodoForm>
+      <TodoForm
+        handleSubmit={handleSubmit}
+        desc={desc}
+        setDesc={setDesc}
+      ></TodoForm>
       <TodoView
         handleDelete={handleDelete}
         pickedItems={pickedItems}
