@@ -1,16 +1,19 @@
 import { Box, Button, TextField } from "@mui/material";
 import React from "react";
+import { useSharedData } from "./TodoList";
 
-interface FormProps {
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  setDesc: React.Dispatch<React.SetStateAction<string>>;
-  desc: string;
-}
-export default function TodoForm({
-  handleSubmit,
-  setDesc,
-  desc,
-}: FormProps): JSX.Element {
+// interface FormProps {
+//   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+//   setNewTodo: React.Dispatch<React.SetStateAction<string>>;
+//   newTodo: string;
+// }
+export default function TodoForm(): JSX.Element {
+// {
+//   handleSubmit,
+//   setNewTodo,
+//   newTodo,
+// }: FormProps
+  const { handleSubmit, setNewTodo, newTodo } = useSharedData();
   return (
     <Box
       component="form"
@@ -27,9 +30,9 @@ export default function TodoForm({
         id="outlined-basic"
         label="Outlined"
         variant="outlined"
-        value={desc}
+        value={newTodo}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setDesc(event.target.value);
+          setNewTodo(event.target.value);
         }}
       ></TextField>
       <Button type="submit" size="small" variant="contained">

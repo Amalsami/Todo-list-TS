@@ -1,21 +1,24 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
-import { Todo } from "./TodoList";
+import { Todo, useSharedData } from "./TodoList";
 interface ViewProps {
   handleDelete: (id: number) => void;
   handlePicked: (id: number) => void;
-  pickedItems: { [key: number]: boolean };
-  item: Todo[];
+  // pickedTodos: { [key: number]: boolean };
+  todos: Todo[];
 }
-export default function TodoView({
-  handleDelete,
-  handlePicked,
-  pickedItems,
-  item,
-}: ViewProps) {
+export default function TodoView() {
+  //   {
+  //   handleDelete,
+  //   handlePicked,
+  //   // pickedTodos,
+  //   todos,
+  // }: ViewProps
+  const { handleDelete, handlePicked, todos } = useSharedData();
+
   return (
     <>
-      {item.map((item) => (
+      {todos.map((todo) => (
         <Box
           sx={{
             backgroundColor: "lightgray",
@@ -30,19 +33,20 @@ export default function TodoView({
           <Typography
             paragraph
             component="span"
-            onClick={() => handlePicked(item.id)}
+            onClick={() => handlePicked(todo.id)}
             sx={{
               cursor: "pointer",
-              textDecoration: pickedItems[item.id] ? "line-through" : "none",
+              textDecoration: todo.picked ? "line-through" : "none",
+              opacity: todo.picked ? 0.5 : 1,
             }}
           >
-            {item.desc}
+            {todo.newTodo}
           </Typography>
           <Button
             color="success"
             variant="contained"
             size="small"
-            onClick={() => handleDelete(item?.id)}
+            onClick={() => handleDelete(todo?.id)}
           >
             Delete
           </Button>
