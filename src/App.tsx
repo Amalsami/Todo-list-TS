@@ -1,5 +1,3 @@
-import React from "react";
-import "./App.css";
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
 import TodoView from "./TodoView";

@@ -20,6 +20,7 @@ export default function TodoView() {
     <>
       {todos.map((todo) => (
         <Box
+          key={todo.id}
           sx={{
             backgroundColor: "lightgray",
             display: "flex",
@@ -46,7 +47,7 @@ export default function TodoView() {
             color="success"
             variant="contained"
             size="small"
-            onClick={() => handleDelete(todo?.id)}
+            onClick={() => handleDelete(todo.id)}
           >
             Delete
           </Button>
