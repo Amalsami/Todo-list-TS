@@ -1,20 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
-import { Todo, useSharedData } from "./TodoList";
-interface ViewProps {
-  handleDelete: (id: number) => void;
-  handlePicked: (id: number) => void;
-  // pickedTodos: { [key: number]: boolean };
-  todos: Todo[];
-}
+import { useTodos } from "../context/todos-provider";
+
 export default function TodoView() {
-  //   {
-  //   handleDelete,
-  //   handlePicked,
-  //   // pickedTodos,
-  //   todos,
-  // }: ViewProps
-  const { handleDelete, handlePicked, todos } = useSharedData();
+
+  const { handleDelete, handlePicked, todos } = useTodos();
 
   return (
     <>

@@ -1,17 +1,9 @@
 import { Box, Button } from "@mui/material";
-import React from "react";
-import { Todo, useSharedData } from "./TodoList";
+import { useTodos } from "../context/todos-provider";
 
-// interface FooterProps {
-//   handleDeletePicked: () => void;
-//   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-// }
 export default function TodoFooter() {
-  //   {
-  //   handleDeletePicked,
-  //   setTodos,
-  // }: FooterProps
-  const { handleDeletePicked, setTodos } = useSharedData();
+
+  const { handleDeletePicked, setTodos } = useTodos();
   return (
     <Box
       component="div"
@@ -19,7 +11,6 @@ export default function TodoFooter() {
         padding: "20px",
         display: "flex",
         gap: "15px",
-        // alignItems: "center",
         justifyContent: "center",
       }}
     >
@@ -29,7 +20,7 @@ export default function TodoFooter() {
         variant="contained"
         onClick={() => setTodos([])}
       >
-        Remove all{" "}
+        Remove all
       </Button>
       <Button
         size="small"

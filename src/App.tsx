@@ -1,7 +1,7 @@
-import TodoList from "./TodoList";
-import TodoForm from "./TodoForm";
-import TodoView from "./TodoView";
-import TodoFooter from "./TodoFooter";
+import TodoList from "./modules/todos/components/todo-list";
+import TodoForm from "./modules/todos/components/todo-form";
+import TodoView from "./modules/todos/components/todo-view";
+import TodoFooter from "./modules/todos/components/todos-footer";
 
 function App() {
   return (

@@ -1,19 +1,10 @@
 import { Box, Button, TextField } from "@mui/material";
 import React from "react";
-import { useSharedData } from "./TodoList";
+import { useTodos } from "../context/todos-provider";
 
-// interface FormProps {
-//   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-//   setNewTodo: React.Dispatch<React.SetStateAction<string>>;
-//   newTodo: string;
-// }
 export default function TodoForm(): JSX.Element {
-// {
-//   handleSubmit,
-//   setNewTodo,
-//   newTodo,
-// }: FormProps
-  const { handleSubmit, setNewTodo, newTodo } = useSharedData();
+
+  const { handleSubmit, setNewTodo, newTodo } = useTodos();
   return (
     <Box
       component="form"
@@ -34,7 +25,7 @@ export default function TodoForm(): JSX.Element {
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setNewTodo(event.target.value);
         }}
-      ></TextField>
+      />
       <Button type="submit" size="small" variant="contained">
         Add
       </Button>
